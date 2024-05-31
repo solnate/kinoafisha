@@ -19,9 +19,10 @@ if(!empty($DB)):
         foreach ($table['data'] as $user_id => $user) {
             $cross_user_data = $DB->read(
                 CROSS_TABLE, '*', CROSS_TABLE_USER_NAME, $user_id
-            )['data'];
-            foreach ($cross_user_data as $users_roles_data)
-                $cross_table[$user_id][] = $users_roles_data[CROSS_TABLE_ROLE_NAME];
+            );
+            if(!empty($cross_user_data['data']))
+                foreach ($cross_user_data['data'] as $users_roles_data)
+                    $cross_table[$user_id][] = $users_roles_data[CROSS_TABLE_ROLE_NAME];
         }
     }
     $DB->disconnect();

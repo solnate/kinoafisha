@@ -1,4 +1,4 @@
-<?php if(!empty($table['data']) && !empty($cross_table) && !empty($roles)):?>
+<?php if(!empty($table['data'])):?>
 <div class="container">
     <h2>Users</h2>
     <table class="users">
@@ -9,14 +9,16 @@
             <th>delete</th>
             <th>update</th>
         </tr>
-        <?php foreach ($table['data'] as $id => $row):?>
+        <?php foreach ($table['data'] as $id => $row): ?>
             <tr>
                 <th data-id="<?=$id?>"><?=$id?></th>
                 <th><?=$row['name']?></th>
                 <th>
-                <?php foreach ($cross_table[$id] as $role_id):?>
-                    <?=$roles['data'][$role_id]['role']?><br>
-                <?php endforeach;?>
+                    <?php if(!empty($cross_table[$id])):?>
+                        <?php foreach ($cross_table[$id] as $role_id):?>
+                            <?=$roles['data'][$role_id]['role']?><br>
+                        <?php endforeach;?>
+                    <?php endif;?>
                 </th>
                 <th><button class="delete-button" data-id="<?=$id?>"></button></th>
                 <th><button class="update-button" data-id="<?=$id?>">Update</button></th>

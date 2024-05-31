@@ -20,7 +20,8 @@ if ($request['action'] == 'create') {
         foreach ($data['role'] as $role_id)
             $DB->create(
                 CROSS_TABLE,
-                [CROSS_TABLE_USER_NAME => $result['id'], CROSS_TABLE_ROLE_NAME => $role_id]);
+                [CROSS_TABLE_USER_NAME => $result['id'], CROSS_TABLE_ROLE_NAME => $role_id]
+            );
     }
     else{
         $result = $DB->create(ROLE_TABLE, $data);
@@ -53,7 +54,7 @@ else if ($request['action'] == 'update') {
     else {
         $result = $DB->update(
             ROLE_TABLE,
-            [ROLE_NAME => $data['ROLE']],
+            [ROLE_NAME => $data['role']],
             ['id' => $data['id']]
         );
     }
