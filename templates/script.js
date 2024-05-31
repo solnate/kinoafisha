@@ -27,7 +27,8 @@ async function create_user(event){
             db: database
         }
         let response = await postReq('/kinoafisha/core/handler.php', JSON.stringify(data));
-
+        if(response.ok) window.location.href='/kinoafisha';
+        else alert('Internal Error');
     }
 }
 document.addEventListener('submit', create_user);
@@ -49,8 +50,8 @@ async function update_user(event){
             db: database
         }
         let response = await postReq('/kinoafisha/core/handler.php', JSON.stringify(data));
-        /*if(response.ok) window.location.reload();
-        else alert('Internal Error');*/
+        if(response.ok) window.location.reload();
+        else alert('Internal Error');
     }
     //Обновить
     else if (event.target.matches('.update-button')){
@@ -82,6 +83,8 @@ async function update_user(event){
                 db: type
             }
             let response = await postReq('/kinoafisha/core/handler.php', JSON.stringify(data));
+            if(response.ok) window.location.href='/kinoafisha';
+            else alert('Internal Error');
         }
         //Кнопка update для изменений таблицы у пользователя
         else {
