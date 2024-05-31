@@ -12,7 +12,7 @@ try {
     http_response_code(502);
     die($e->getMessage());
 }
-
+$errors = array();
 $data = json_decode($request['data'], true);
 if ($request['action'] == 'create') {
     if($request['db'] == 'users') {
@@ -28,30 +28,30 @@ if ($request['action'] == 'create') {
 }
 else if ($request['action'] == 'delete') {
     if($request['db'] == 'users') {
-        $DB->delete(CROSS_TABLE, CROSS_TABLE_USER_NAME, $data['id']);
-        $DB->delete(USER_TABLE, 'id', $data['id']);
+        $result = $DB->delete(CROSS_TABLE, CROSS_TABLE_USER_NAME, $data['id']);
+        $result = $DB->delete(USER_TABLE, 'id', $data['id']);
     }
     else {
-        $DB->delete(CROSS_TABLE, CROSS_TABLE_ROLE_NAME, $data['id']);
-        $DB->delete(ROLE_TABLE, 'id', $data['id']);
+        $result = $DB->delete(CROSS_TABLE, CROSS_TABLE_ROLE_NAME, $data['id']);
+        $result = $DB->delete(ROLE_TABLE, 'id', $data['id']);
     }
 }
 else if ($request['action'] == 'update') {
     if($request['db'] == 'users') {
         if($data['name'])
-            $DB->update(
+            $result = $DB->update(
                 USER_TABLE,
                 [USER_NAME => $data['name']],
                 ['id' => $data['id']]
             );
-        $DB->update_cross(
+        $result = $DB->update_cross(
             CROSS_TABLE,
             $data,
             $data['id']
         );
     }
     else {
-        $DB->update(
+        $result = $DB->update(
             ROLE_TABLE,
             [ROLE_NAME => $data['ROLE']],
             ['id' => $data['id']]

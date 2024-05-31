@@ -9,15 +9,16 @@ try {
     $DB = new Database($auth['host'], $auth['user'], $auth['password'], $auth['database']);
 } catch (Exception $e) {
     http_response_code(502);
-    die($e->getMessage());
+    print_r($e->getMessage());
 }
-$roles = $DB->read(ROLE_TABLE);
-$DB->disconnect();
-?>
-<select class="form-control" name="role" multiple>
-    <?php foreach ($roles['data'] as $id => $row):?>
-        <option name="role" value="<?=$row[0]?>" selected>
-            <?=$row['role']?>
-        </option>
-    <?php endforeach;?>
-</select>
+if(!empty($DB)):
+    $roles = $DB->read(ROLE_TABLE);
+    $DB->disconnect();?>
+    <select class="form-control" name="role" multiple>
+        <?php foreach ($roles['data'] as $id => $row): ?>
+            <option name="role" value="<?= $row[0] ?>" selected>
+                <?= $row['role'] ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+<?php endif;?>
