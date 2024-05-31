@@ -1,0 +1,33 @@
+<section class="create-section">
+    <div class="container" id="users">
+        <h2>Create User</h2>
+        <form class="create_user" method="POST">
+            <div class="form-group">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Name"
+                       name="name"
+                       required/>
+            </div>
+            <?php include $_SERVER['DOCUMENT_ROOT'] . '/templates/blocks/form-group.phtml';?>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+    <div class="container" id="roles">
+        <h2>Create Role</h2>
+        <form class="create_role" method="POST">
+            <div class="form-group">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Role"
+                       name="role"
+                       required/>
+            </div>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+</section>
+<section class="table-section">
+    <a href="/kinoafisha/login">Login</a>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/templates/blocks/table.phtml';?>
+</section>

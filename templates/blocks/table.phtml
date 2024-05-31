@@ -1,0 +1,49 @@
+<?php if(!empty($table['data']) && !empty($cross_table) && !empty($roles)):?>
+<div class="container">
+    <h2>Users</h2>
+    <table class="users">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>role</th>
+            <th>delete</th>
+            <th>update</th>
+        </tr>
+        <?php foreach ($table['data'] as $id => $row):?>
+            <tr>
+                <th data-id="<?=$id?>"><?=$id?></th>
+                <th><?=$row['name']?></th>
+                <th>
+                <?php foreach ($cross_table[$id] as $role_id):?>
+                    <?=$roles['data'][$role_id]['role']?><br>
+                <?php endforeach;?>
+                </th>
+                <th><button class="delete-button" data-id="<?=$id?>"></button></th>
+                <th><button class="update-button" data-id="<?=$id?>">Update</button></th>
+            </tr>
+        <?php endforeach;?>
+    </table>
+</div>
+<?php endif;?>
+
+<?php if(!empty($roles['data'])):?>
+<div class="container">
+    <h2>Roles</h2>
+    <table class="roles">
+        <tr>
+            <th>id</th>
+            <th>role</th>
+            <th>delete</th>
+            <th>update</th>
+        </tr>
+        <?php foreach ($roles['data'] as $id => $row):?>
+            <tr>
+                <th data-id="<?=$id?>"><?=$id?></th>
+                <th><?=$row['role']?></th>
+                <th><button class="delete-button" data-id="<?=$id?>"></button></th>
+                <th><button class="update-button" data-id="<?=$id?>">Update</button></th>
+            </tr>
+        <?php endforeach;?>
+    </table>
+</div>
+<?php endif;?>

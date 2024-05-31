@@ -1,0 +1,13 @@
+<?php if(!empty($roles)):?>
+<div class="form-group">
+    <label>Role</label>
+    <select class="form-control" name="role" multiple>
+        <?php foreach ($roles['data'] as $id => $row):?>
+        <option name="role" value="<?=$row[0]?>">
+            <?=$row['role']?>
+        </option>
+        <?php endforeach;?>
+    </select>
+</div>
+<?php endif;?>
+
