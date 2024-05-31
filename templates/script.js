@@ -26,8 +26,8 @@ async function create_user(event){
             action : 'create',
             db: database
         }
-        let response = await postReq('/kinoafisha/core/handler.php', JSON.stringify(data));
-        if(response.ok) window.location.href='/kinoafisha';
+        let response = await postReq('./core/handler.php', JSON.stringify(data));
+        if(response.ok) window.location.href='.';
         else alert('Internal Error');
     }
 }
@@ -49,7 +49,7 @@ async function update_user(event){
             action : 'delete',
             db: database
         }
-        let response = await postReq('/kinoafisha/core/handler.php', JSON.stringify(data));
+        let response = await postReq('./core/handler.php', JSON.stringify(data));
         if(response.ok) window.location.reload();
         else alert('Internal Error');
     }
@@ -82,8 +82,8 @@ async function update_user(event){
                 action : 'update',
                 db: type
             }
-            let response = await postReq('/kinoafisha/core/handler.php', JSON.stringify(data));
-            if(response.ok) window.location.href='/kinoafisha';
+            let response = await postReq('./core/handler.php', JSON.stringify(data));
+            if(response.ok) window.location.href='.';
             else alert('Internal Error');
         }
         //Кнопка update для изменений таблицы у пользователя
@@ -94,7 +94,7 @@ async function update_user(event){
             row[1].innerHTML = '<input type="text" class="form-control" name="name" required="">';
             //Получаем список ролей
             if(type === 'users') {
-                let response = await postReq('/kinoafisha/core/include/getSelect.php');
+                let response = await postReq('./core/include/getSelect.php');
                 let text = await response.text();
                 row[2].innerHTML = text;
             }
@@ -113,8 +113,8 @@ async function registration(event){
         let data ={
             data : JSON.stringify(value)
         }
-        let response = await postReq('/kinoafisha/core/registration.php', JSON.stringify(data));
-        if(response.ok) window.location.href='/kinoafisha';
+        let response = await postReq('./core/registration.php', JSON.stringify(data));
+        if(response.ok) window.location.href='.';
         else alert('Internal Error');
     }
 }
