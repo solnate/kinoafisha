@@ -1,9 +1,15 @@
 <?php
 $request = json_decode(file_get_contents('php://input'), true);
 if(empty($request)) header('Location: /kinoafisha/login');
-file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/core/data/auth', $request);
 $auth = json_decode($request['data'], true);
-$connection = mysqli_connect($auth['host'], $auth['user'], $auth['password'], $auth['database']);
+try {
+    $connection = mysqli_connect($auth['host'], $auth['user'], $auth['password'], $auth['database']);
+}
+catch(Exception $e) {
+    http_response_code(502);
+    die($e->getMessage());
+}
+file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/core/data/auth', $request);
 $query = 'create table roles
 (
     id   int auto_increment
@@ -31,4 +37,7 @@ create table users_roles
 );';
 $result = $connection->multi_query($query);
 
+if(!$result){
+    http_response_code(502);
+}
 
